@@ -45,7 +45,7 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.allow-http: "false"
-    kubernetes.io/ingress.global-static-ip-name: services
+    kubernetes.io/ingress.regional-static-ip-name: services
     networking.gke.io/managed-certificates: svcs-cert
   name: svcs-ingress
   namespace: services
