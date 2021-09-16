@@ -70,12 +70,3 @@ spec:
   domains:
     - services.thomasflanigan.com
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: iap-secret
-  namespace: services
-type: Opaque
-data:
-  client_id: $SVCS_CLIENT_ID
-  client_secret: $SVCS_CLIENT_SECRET
