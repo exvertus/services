@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: services
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: landing-page
+  namespace: services
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: landing-page
+  template:
+    metadata:
+      labels:
+        app: landing-page
+    spec:
+      containers:
+        - name: nginx
+          # Meant to be run with envsubst, set SVCS_SITE_IMG to gcr.io address
+          image: $SVCS_SITE_IMG
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: landing-page
+  namespace: services
+spec:
+  selector:
+    app: landing-page
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.allow-http: "false"
+    kubernetes.io/ingress.global-static-ip-name: services
+    networking.gke.io/managed-certificates: svcs-cert
+  name: svcs-ingress
+  namespace: services
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: landing-page
+                port:
+                  number: 8080
+---
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: svcs-cert
+  namespace: services
+spec:
+  domains:
+    - services.thomasflanigan.com
