@@ -33,7 +33,7 @@ metadata:
   namespace: services
 spec:
   selector:
-    app: site
+    app: landing-page
   type: NodePort
   ports:
     - protocol: TCP
