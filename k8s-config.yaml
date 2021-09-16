@@ -44,9 +44,9 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    kubernetes.io/ingress.allow-http: "false"
-#    kubernetes.io/ingress.global-static-ip-name: services
-    networking.gke.io/managed-certificates: svcs-cert
+  #   kubernetes.io/ingress.allow-http: "false"
+    kubernetes.io/ingress.global-static-ip-name: services
+  #   networking.gke.io/managed-certificates: svcs-cert
   name: svcs-ingress
   namespace: services
 spec:
@@ -60,12 +60,12 @@ spec:
                 name: landing-page
                 port:
                   number: 8080
----
-apiVersion: networking.gke.io/v1beta1
-kind: ManagedCertificate
-metadata:
-  name: svcs-cert
-  namespace: services
-spec:
-  domains:
-    - services.thomasflanigan.com
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: ManagedCertificate
+# metadata:
+#   name: svcs-cert
+#   namespace: services
+# spec:
+#   domains:
+#     - services.thomasflanigan.com
