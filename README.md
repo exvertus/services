@@ -1,6 +1,7 @@
 # Tom's Services
 Internal services page code for personal and friends' projects
 
+* See env.shadow for needed env vars
 * Running on [nginx](https://www.nginx.com/) webserver
     * Build Dockerfile with ```docker build -t $SVCS_SITE_IMG .```
     * And push ```docker push $SVCS_SITE_IMG```

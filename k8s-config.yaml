@@ -31,6 +31,8 @@ kind: Service
 metadata:
   name: landing-page
   namespace: services
+  annotations:
+    beta.cloud.google.com/backend-config: '{"default": "svcs-ingress-be"}'
 spec:
   selector:
     app: landing-page
@@ -69,3 +71,14 @@ metadata:
 spec:
   domains:
     - services.thomasflanigan.com
+---
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: svcs-ingress-be
+  namespace: services
+spec:
+  iap:
+    enabled: true
+    oauthclientCredentials:
+      secretName: iap-secret
