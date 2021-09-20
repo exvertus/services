@@ -62,6 +62,12 @@ spec:
                 name: landing-page
                 port:
                   number: 8080
+          - path: /jenkins
+            pathType: ImplementationSpecific
+              service:
+                name: gke-tom-jenkins
+                port:
+                  number: 8080
 ---
 apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
