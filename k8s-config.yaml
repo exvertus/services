@@ -20,7 +20,6 @@ spec:
     spec:
       containers:
         - name: nginx
-          # Meant to be run with envsubst, set SVCS_SITE_IMG to gcr.io address
           image: $SVCS_SITE_IMG
           imagePullPolicy: Always
           ports:
@@ -39,7 +38,7 @@ spec:
   type: NodePort
   ports:
     - protocol: TCP
-      port: 8080
+      port: 60000
       targetPort: 80
 ---
 apiVersion: networking.k8s.io/v1
@@ -59,9 +58,16 @@ spec:
             pathType: ImplementationSpecific
             backend:
               service:
-                name: landing-page
+                name: gke-tom-jenkins
                 port:
                   number: 8080
+          - path: /services/*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: landing-page
+                port:
+                  number: 60000
 ---
 apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
