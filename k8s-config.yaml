@@ -48,6 +48,7 @@ metadata:
     kubernetes.io/ingress.allow-http: "false"
     kubernetes.io/ingress.global-static-ip-name: services
     networking.gke.io/managed-certificates: svcs-cert
+    networking.gke.io/v1beta1.FrontendConfig: "svcs-ingress-fe"
   name: svcs-ingress
   namespace: services
 spec:
@@ -88,3 +89,14 @@ spec:
     enabled: true
     oauthclientCredentials:
       secretName: iap-secret
+---
+apiVersion: networking.gke.io/v1beta1
+kind: FrontendConfig
+metadata:
+  name: svcs-ingress-fe
+  namespace: services
+spec:
+  sslPolicy: tls1dot2modern
+  redirectToHttps:
+    enabled: true
+    responseCodeName: FOUND
