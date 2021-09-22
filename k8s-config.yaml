@@ -96,7 +96,6 @@ metadata:
   name: svcs-ingress-fe
   namespace: services
 spec:
-  sslPolicy: tls1dot2modern
   redirectToHttps:
     enabled: true
     responseCodeName: FOUND
