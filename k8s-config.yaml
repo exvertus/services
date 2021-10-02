@@ -105,8 +105,8 @@ metadata:
   annotations:
     kubernetes.io/ingress.allow-http: "true"
     kubernetes.io/ingress.global-static-ip-name: jenkins-notifications
-    # networking.gke.io/managed-certificates: 
-    # networking.gke.io/v1beta1.FrontendConfig: ""
+    networking.gke.io/managed-certificates: notifications
+    networking.gke.io/v1beta1.FrontendConfig: "gke-gitwebhookproxy"
   name: notifications-ingress
   namespace: services
 spec:
@@ -120,28 +120,27 @@ spec:
                 name: gke-gitwebhookproxy
                 port:
                   number: 8081
-# ---
-# apiVersion: networking.gke.io/v1
-# kind: ManagedCertificate
-# metadata:
-#   name: svcs-cert
-#   namespace: services
-# spec:
-#   domains:
-#     - services.thomasflanigan.com
-# ---
+---
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: notifications
+  namespace: services
+spec:
+  domains:
+    - notifications.thomasflanigan.com
 ---
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
   name: gke-gitwebhookproxy
   namespace: services
-# ---
-# apiVersion: networking.gke.io/v1beta1
-# kind: FrontendConfig
-# metadata:
-#   name: svcs-ingress-fe
-#   namespace: services
-# spec:
-#   redirectToHttps:
-#     enabled: true
+---
+apiVersion: networking.gke.io/v1beta1
+kind: FrontendConfig
+metadata:
+  name: gke-gitwebhookproxy
+  namespace: services
+spec:
+  redirectToHttps:
+    enabled: true
