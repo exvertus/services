@@ -130,16 +130,12 @@ spec:
 #   domains:
 #     - services.thomasflanigan.com
 # ---
-# apiVersion: cloud.google.com/v1
-# kind: BackendConfig
-# metadata:
-#   name: svcs-ingress-be
-#   namespace: services
-# spec:
-#   iap:
-#     enabled: true
-#     oauthclientCredentials:
-#       secretName: iap-secret
+---
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: gke-gitwebhookproxy
+  namespace: services
 # ---
 # apiVersion: networking.gke.io/v1beta1
 # kind: FrontendConfig
