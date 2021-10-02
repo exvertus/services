@@ -113,7 +113,7 @@ spec:
   rules:
     - http:
         paths:
-          - path: /github-webhook/*
+          - path: /github-webhook/
             pathType: ImplementationSpecific
             backend:
               service:
