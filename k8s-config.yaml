@@ -104,7 +104,7 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.allow-http: "true"
-    # kubernetes.io/ingress.global-static-ip-name: 
+    kubernetes.io/ingress.global-static-ip-name: jenkins-notifications
     # networking.gke.io/managed-certificates: 
     # networking.gke.io/v1beta1.FrontendConfig: ""
   name: notifications-ingress
