@@ -69,6 +69,13 @@ spec:
                 name: landing-page
                 port:
                   number: 60000
+          - path: /tlf-test-site/*
+            pathType: ImplementationSpecific
+              backend:
+                service:
+                  name: tlf-test-site
+                  port:
+                    number: 60001
 ---
 apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
