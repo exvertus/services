@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    debugging: "true"
+  name: debug-pod
+  namespace: services
+spec:
+  containers:
+    - name: net-debug
+      image: registry.hub.docker.com/praqma/network-multitool:latest
+      command:
+        - sh
+      tty: true
