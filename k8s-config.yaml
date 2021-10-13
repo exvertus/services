@@ -49,9 +49,6 @@ metadata:
     kubernetes.io/ingress.global-static-ip-name: services
     networking.gke.io/managed-certificates: svcs-cert
     networking.gke.io/v1beta1.FrontendConfig: "svcs-ingress-fe"
-    metadata:
-      annotations:
-        cloud.google.com/backend-config: '{"ports": {"8080":"gke-jenkins-be","60000":"landing-page-be","60001":"test-site-be"}}'
   name: svcs-ingress
   namespace: services
 spec:
@@ -74,11 +71,11 @@ spec:
                   number: 60000
           - path: /tlf-test-site/*
             pathType: ImplementationSpecific
-              backend:
-                service:
-                  name: test-site
-                  port:
-                    number: 60001
+            backend:
+              service:
+                name: test-site
+                port:
+                  number: 60001
 ---
 apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
