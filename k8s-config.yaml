@@ -51,11 +51,7 @@ metadata:
     networking.gke.io/v1beta1.FrontendConfig: "svcs-ingress-fe"
     metadata:
       annotations:
-        cloud.google.com/backend-config: '{"ports": {
-        "8080":"gke-jenkins-be",
-        "60000":"landing-page-be",
-        "60001":"test-site-be"
-        }}'
+        cloud.google.com/backend-config: '{"ports": {"8080":"gke-jenkins-be","60000":"landing-page-be","60001":"test-site-be"}}'
   name: svcs-ingress
   namespace: services
 spec:
